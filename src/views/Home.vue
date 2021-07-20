@@ -1,18 +1,44 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Users :users="users"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Users from '@/components/Users.vue'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
-  }
+    Users
+  },
+
+  data() {
+    return {
+      users: []
+    }
+  },
+
+  created(){
+    this.getAllUser();
+  },
+
+  computed: {
+    ...mapActions({
+      addUsers: 'addAllUser',
+    }),
+  },
+
+  methods: {
+    getAllUser(){
+      this.axios.get('/users').then((response) => {
+        console.log(response.data);
+        this.users = response.data;
+        // this.addUsers(this.users);
+      }); 
+    }
+  },
 }
 </script>

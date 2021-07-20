@@ -1,0 +1,2 @@
+export const USER_LIST_CHANGE = 'USER_LIST_CHANGE';
+export const USER_SELECT = 'USER_SELECT';
